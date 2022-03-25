@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories=Category::all();
+        $categories=Category::with('childrenRecursive')
+            ->where('parent_id',null)
+            ->get();
         return view('admin.categories.create',compact(['categories']));
     }
 
@@ -46,7 +49,7 @@ class CategoryController extends Controller
         $category->meta_keywords=$request->input('meta_keywords');
         $category->save();
 
-        return view('admin.categories.index');
+        return redirect('/administrator/categories');
     }
 
     /**
@@ -68,7 +71,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories=Category::with('childrenRecursive')
+            ->where('parent_id',null)
+            ->get();
+        $category=Category::findorfail($id);
+        return view('admin.categories.edit',compact(['categories','category']));
     }
 
     /**
@@ -80,7 +87,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category=Category::findorfail($id);
+        $category->name=$request->input('name');
+        $category->parent_id=$request->input('parent_id');
+        $category->meta_title=$request->input('meta_title');
+        $category->meta_desc=$request->input('meta_desc');
+        $category->meta_keywords=$request->input('meta_keywords');
+        $category->save();
+
+        return redirect('/administrator/categories');
     }
 
     /**
@@ -91,6 +106,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category=Category::with('childrenRecursive')->where('id',$id)->first();
+        if(count($category->childrenRecursive)>0){
+            Session::flash('error_category','این دسته بندی حاوی زیرمجموعه میباشد و حذف ان امکان پذیر نمیباشد.');
+            return redirect('/administrator/categories');
+        }
+        $category->delete();
+        return redirect('/administrator/categories');
     }
 }

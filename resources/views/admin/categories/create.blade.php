@@ -18,10 +18,16 @@
                <input name="name" id="name" type="text" class="form-control" placeholder="عنوان دسته بندی">
                </div>
 
-                    <label for="name"> گروه اصلی : </label>
+                    <label for="name"> گروه  : </label>
                     <div class="form-group">
                         <select name="parent_id" id="parent_id" class="form-control">
-                            <option value="">انتخاب کنید </option>
+                            <option value=""> گروه اصلی</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                @if(count($category->childrenRecursive))
+                                    @include('admin.partials.category',['categories'=>$category->childrenRecursive,'level'=>1])
+                                @endif
+                                @endforeach
                         </select>
                     </div>
 

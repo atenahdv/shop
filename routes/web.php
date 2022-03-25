@@ -21,3 +21,5 @@ Route::prefix('administrator')->group(function (){
     Route::get('/','App\Http\Controllers\Backend\MainController@mainpage');
     Route::resource('categories','App\Http\Controllers\Backend\CategoryController');
 });
+Route::get('/administrator/delete/{id}', 'App\Http\Controllers\Backend\CategoryController@destroy')
+    ->name('categories.destroy');

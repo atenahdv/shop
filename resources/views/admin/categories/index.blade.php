@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 
 @section('content')
+
     <section class="content">
     <div class="card">
         <div class="card-header border-transparent col-md-12">
@@ -13,6 +14,11 @@
         </div>
 
         <div class="card-body p-0 col-md-12">
+            @if(Session::has('error_category'))
+                <div class="alert alert-danger">
+                    {{session('error_category')}}
+                </div>
+            @endif
             <h3 class="card-title">دسته بندی ها </h3>
             <div class="table-responsive rtl">
                 <table class="table m-0">
@@ -30,7 +36,7 @@
                         <td class="text-center">{{$category->name}}</td>
                         <td class="text-center">
                             <a href="{{route('categories.edit',$category->id)}}" class="btn btn-warning">ویرایش</a>
-                            <a href="{{route('categories.destroy',$category->id)}}" class="btn btn-danger" onclick="return confirm('آیا از حذف دسته بندی مطمعئن هستید؟')">حذف</a>
+                            <a href="{{route('categories.destroy', $category->id)}}" class="btn btn-danger" onclick="return confirm('آیا از حذف دسته بندی مطمعئن هستید؟')">حذف</a>
                         </td>
 
                     </tr>
