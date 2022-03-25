@@ -18,28 +18,27 @@
                 <table class="table m-0">
                     <thead>
                     <tr>
-                        <th>شناسه</th>
-                        <th>عنوان</th>
-                        <th></th>
+                        <th class="text-center">شناسه</th>
+                        <th class="text-center">عنوان</th>
+                        <th class="text-center">عملیات</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($categories as $category)
                     <tr>
-                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                        <td>Call of Duty IV</td>
-                        <td><span class="badge badge-success">Shipped</span></td>
-                        <td>
+                        <td class="text-center">{{$category->id}}</td>
+                        <td class="text-center">{{$category->name}}</td>
+                        <td class="text-center">
+                            <a href="{{route('categories.edit',$category->id)}}" class="btn btn-warning">ویرایش</a>
+                            <a href="{{route('categories.destroy',$category->id)}}" class="btn btn-danger" onclick="return confirm('آیا از حذف دسته بندی مطمعئن هستید؟')">حذف</a>
                         </td>
+
                     </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
 
-        </div>
-
-        <div class="card-footer clearfix">
-            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
         </div>
 
     </div>
