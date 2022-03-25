@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function masterPage()
+    public function mainpage()
     {
         return view('admin.main.index');
     }
