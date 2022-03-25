@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 Route::prefix('administrator')->group(function (){
     Route::get('/','App\Http\Controllers\Backend\MainController@mainpage');
+    Route::resource('categories','App\Http\Controllers\Backend\CategoryController');
 });
