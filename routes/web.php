@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::prefix('administrator')->group(function (){
     Route::get('/','App\Http\Controllers\Backend\MainController@mainpage');
     Route::resource('categories','App\Http\Controllers\Backend\CategoryController');
+    Route::resource('attributes-group','App\Http\Controllers\Backend\AttributeGroupController');
 });
-Route::get('/administrator/delete/{id}', 'App\Http\Controllers\Backend\CategoryController@destroy')
+Route::get('/administrator/categories/delete/{id}', 'App\Http\Controllers\Backend\CategoryController@destroy')
     ->name('categories.destroy');
+Route::get('/administrator/attributes-group/delete/{id}', 'App\Http\Controllers\Backend\AttributeGroupController@destroy')
+    ->name('attributes-group.destroy');
