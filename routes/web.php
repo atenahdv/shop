@@ -22,6 +22,7 @@ Route::prefix('administrator')->group(function (){
     Route::resource('categories','App\Http\Controllers\Backend\CategoryController');
     Route::resource('attributes-group','App\Http\Controllers\Backend\AttributeGroupController');
     Route::resource('attributes-value','App\Http\Controllers\Backend\AttributeValueController');
+    Route::resource('brands','App\Http\Controllers\Backend\BrandController');
 });
 Route::get('/administrator/categories/delete/{id}', 'App\Http\Controllers\Backend\CategoryController@destroy')
     ->name('categories.destroy');

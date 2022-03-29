@@ -384,6 +384,16 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
+                        <i class="fa fa-database"></i>
+                        <span> برند ها</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('brands.index')}}"><i class="fa fa-circle-o"></i>لیست برند ها  </a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="fa fa-edit"></i> <span>فرم ها</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
