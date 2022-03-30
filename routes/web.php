@@ -31,3 +31,5 @@ Route::get('/administrator/attributes-group/delete/{id}', 'App\Http\Controllers\
     ->name('attributes-group.destroy');
 Route::get('/administrator/attributes-value/delete/{id}', 'App\Http\Controllers\Backend\AttributeValueController@destroy')
     ->name('attributes-value.destroy');
+Route::get('/administrator/brands/delete/{id}', 'App\Http\Controllers\Backend\BrandController@destroy')
+    ->name('brands.destroy');

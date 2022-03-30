@@ -42,7 +42,7 @@ class PhotoController extends Controller
         $filename=time().$uploadedfile->getClientOriginalName();
         $original_name=$uploadedfile->getClientOriginalName();
     Storage::disk('local')->putFileAs(
-        'photos',$uploadedfile,$filename
+        'public/photos',$uploadedfile,$filename
     );
 
     $photo=new Photo();

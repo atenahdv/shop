@@ -14,6 +14,7 @@
         </div>
 
         <div class="card-body p-0 col-md-12">
+            @include('admin.partials.form-errors')
             @if(Session::has('success'))
                 <div class="alert alert-success">
                     {{session('success')}}
