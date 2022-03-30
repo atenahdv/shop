@@ -43,14 +43,16 @@ class BrandController extends Controller
         $validator=Validator::make($request->all(),[
            'title' => 'required|unique:brands',
            'description' => 'required',
+           'photo_id' => 'required',
         ],[
             'title.required' => 'عنوان برند شما باید درج شود.',
             'title.unique' => 'عنوان برند شما باید منحصر به فرد باشد.',
-            'description.required' => 'توضیحات برند شما باید منحصر درج  شود.',
+            'description.required' => 'توضیحات برند شما باید  درج  شود.',
+            'photo_id.required' => 'تصویر برند شما باید  اپلود  شود.',
 
         ]);
         if($validator->fails()){
-            return redirect('/administrator/brands/')->withErrors($validator)->withInput();
+            return redirect('/administrator/brands/create')->withErrors($validator)->withInput();
         }else{
             $brands= new Brand();
             $brands->title = $request->input('title');

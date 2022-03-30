@@ -16,22 +16,30 @@
                 <div class="col-md-6 col-md-offset-3">
                 <form action="/administrator/brands" method="post" >
 @csrf
-          <label for="name">عنوان :  </label>
+          <label for="title">عنوان :  </label>
            <div class="form-group">
                <input name="title" id="title" type="text" class="form-control" placeholder="عنوان  برند">
+               @error('title')
+               <div class="text-danger">{{ $message }}</div>
+               @enderror
                </div>
 
 
                     <label for="meta_desc">توضیحات برند:  </label>
                     <div class="form-group">
                         <textarea name="description" id="description" type="text" class="form-control" placeholder="توضیحات برند"></textarea>
-
+                        @error('description')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <label for="photo">تصویر :  </label>
                     <input type="hidden" name="photo_id" id="photo_id">
                     <div class="form-group">
                     <div id="photo" class="dropzone"></div>
                     </div>
+                    @error('photo_id')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
     <button type="submit" class=" pull-left btn btn-success">ذخیره</button>
 
                 </form>
