@@ -14,9 +14,9 @@
         </div>
 
         <div class="card-body p-0 col-md-12">
-            @if(Session::has('error'))
-                <div class="alert alert-danger">
-                    {{session('error')}}
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{session('success')}}
                 </div>
             @endif
             <h3 class="card-title"> برند ها </h3>

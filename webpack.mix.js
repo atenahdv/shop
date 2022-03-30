@@ -15,5 +15,5 @@ const mix = require('laravel-mix');
 //     .postCss('resources/css/app.css', 'public/css', [
 //         //
 //     ]);
-mix.styles(['resources/backend/css/dropzone.min.css'],'public/admin/dist/css/drpzone.css')
+mix.styles(['resources/backend/css/dropzone.min.css'],'public/admin/dist/css/dropzone.css')
     .scripts(['resources/backend/js/dropzone.min.js'],'public/admin/dist/js/dropzone.js')
