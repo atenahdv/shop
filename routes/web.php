@@ -23,6 +23,7 @@ Route::prefix('administrator')->group(function (){
     Route::resource('attributes-group','App\Http\Controllers\Backend\AttributeGroupController');
     Route::resource('attributes-value','App\Http\Controllers\Backend\AttributeValueController');
     Route::resource('brands','App\Http\Controllers\Backend\BrandController');
+    Route::resource('products','App\Http\Controllers\Backend\ProductController');
     Route::post('photos/upload','App\Http\Controllers\Backend\PhotoController@upload')->name('photos.upload');
 });
 Route::get('/administrator/categories/delete/{id}', 'App\Http\Controllers\Backend\CategoryController@destroy')

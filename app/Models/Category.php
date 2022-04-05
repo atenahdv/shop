@@ -18,4 +18,13 @@ class Category extends Model
     {
       return $this->children()->with('childrenRecursive');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function AttributeGroups()
+    {
+        $this->hasMany(AttributeGroup::class,'attributegroup_id');
+    }
 }
