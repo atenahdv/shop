@@ -37,6 +37,8 @@
                         <td class="text-center">
                             <a href="{{route('categories.edit',$category->id)}}" class="btn btn-warning">ویرایش</a>
                             <a href="{{route('categories.destroy', $category->id)}}" class="btn btn-danger" onclick="return confirm('آیا از حذف دسته بندی مطمعئن هستید؟')">حذف</a>
+
+                            <a href="{{route('categories.indexSetting',$category->id)}}" class="btn btn-primary">تنظیمات</a>
                         </td>
 
                     </tr>

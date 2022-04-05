@@ -14,4 +14,9 @@ class AttributeGroup extends Model
     {
        return $this->hasMany(AttributeValue::class);
     }
+
+    public function categories()
+    {
+     return $this->belongsToMany(Category::class,'attributegroup_category','attributegroup_id','category_id');
+    }
 }
