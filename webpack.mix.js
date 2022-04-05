@@ -11,9 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-// mix.js('resources/js/app.js', 'public/js')
-//     .postCss('resources/css/app.css', 'public/css', [
-//         //
-//     ]);
+mix.js('resources/js/app.js', 'public/admin/js').vue({ version: 2 });
+
 mix.styles(['resources/backend/css/dropzone.min.css'],'public/admin/dist/css/dropzone.css')
     .scripts(['resources/backend/js/dropzone.min.js'],'public/admin/dist/js/dropzone.js')

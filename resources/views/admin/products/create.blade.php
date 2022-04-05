@@ -4,6 +4,10 @@
 @endsection
 
 @section('content')
+    <div id="app">
+        <example-component></example-component>
+
+    </div>
     <section class="content">
         <div class="card">
             <div class="card-header border-transparent col-md-12">
@@ -133,4 +137,5 @@
         });
 
     </script>
+<script src="{{asset('admin/js/app.js')}}"></script>
     @endsection
