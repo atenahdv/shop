@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('api')->group(function (){
+    Route::get('/categories','App\Http\Controllers\Backend\CategoryController@apiIndex');
+  });
+
+
 Route::prefix('administrator')->group(function (){
     Route::get('/','App\Http\Controllers\Backend\MainController@mainpage');
     Route::resource('categories','App\Http\Controllers\Backend\CategoryController');

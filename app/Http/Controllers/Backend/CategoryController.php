@@ -132,4 +132,13 @@ class CategoryController extends Controller
         return redirect()->to('/administrator/categories');
 
     }
+
+    public function apiIndex()
+    {
+        $empData['data']=Category::with('childrenRecursive')
+            ->where('parent_id',null)
+            ->get();
+
+        return response()->json($empData);
+    }
 }

@@ -4,10 +4,7 @@
 @endsection
 
 @section('content')
-    <div id="app">
-        <example-component></example-component>
 
-    </div>
     <section class="content">
         <div class="card">
             <div class="card-header border-transparent col-md-12">
@@ -120,6 +117,45 @@
     </section>
 @endsection
 @section('scripts')
+
+    <script type='text/javascript'>
+        // $(document).ready(function(){
+        //     $('#category_id').change(function(){
+        //         // Empty the dropdown
+        //         $('#category_id').find('option').not(':first').remove();
+        //
+        //         // AJAX request
+        //         $.ajax({
+        //             url: '/api/categories',
+        //             type: 'get',
+        //             dataType: 'json',
+        //             success: function(response){
+        //                 var len = 0;
+        //                 if(response['data'] != null){
+        //                     len = response['data'].length;
+        //                 }
+        //
+        //                 if(len > 0){
+        //                     // Read data and create <option >
+        //                     for(var i=0; i<len; i++){
+        //
+        //                         var id = response['data'][i].id;
+        //                         var name = response['data'][i].name;
+        //
+        //                         var option = "<option value='"+id+"'>"+name+"</option>";
+        //
+        //                         $("#category_id").append(option);
+        //                     }
+        //                 }
+        //
+        //             }
+        //         });
+        //         });
+        //
+        // });
+    </script>
+
+
 <script type="text/javascript" src="{{asset('/admin/dist/js/dropzone.js')}}"></script>
     <script>
         var csrf_token = "{{ csrf_token() }}";
@@ -137,5 +173,4 @@
         });
 
     </script>
-<script src="{{asset('admin/js/app.js')}}"></script>
     @endsection
