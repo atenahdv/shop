@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AttributeGroup;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
@@ -140,5 +141,15 @@ class CategoryController extends Controller
             ->get();
 
         return response()->json($empData);
+    }
+
+    public function apiIndexAttribute(Request $request)
+    {
+      $categories=$request->categories_id;
+      $attributeGroup['data']=AttributeGroup::with('attributesValue','categories')
+          ->whereHas('categories', function ($q) use ($categories) {
+              $q->whereIN('categories.id',$categories);
+          })->get();
+        return response()->json($attributeGroup);
     }
 }

@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::prefix('api')->group(function (){
     Route::get('/categories','App\Http\Controllers\Backend\CategoryController@apiIndex');
+    Route::post('/categories/attribute','App\Http\Controllers\Backend\CategoryController@apiIndexAttribute');
   });
 
 

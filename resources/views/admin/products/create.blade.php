@@ -59,6 +59,13 @@
                         </select>
                     </div>
 
+                    <label for="attribute_id"> ویژگی : </label>
+                    <div class="form-group">
+                        <select name="attribute_id" id="attribute_id" class="form-control" >
+
+                        </select>
+                    </div>
+
                     <label for="price">قیمت  :  </label>
                     <div class="form-group">
                         <input name="price" id="price" type="number" class="form-control" placeholder="قیمت محصول ">
@@ -119,40 +126,42 @@
 @section('scripts')
 
     <script type='text/javascript'>
-        // $(document).ready(function(){
-        //     $('#category_id').change(function(){
-        //         // Empty the dropdown
-        //         $('#category_id').find('option').not(':first').remove();
-        //
-        //         // AJAX request
-        //         $.ajax({
-        //             url: '/api/categories',
-        //             type: 'get',
-        //             dataType: 'json',
-        //             success: function(response){
-        //                 var len = 0;
-        //                 if(response['data'] != null){
-        //                     len = response['data'].length;
-        //                 }
-        //
-        //                 if(len > 0){
-        //                     // Read data and create <option >
-        //                     for(var i=0; i<len; i++){
-        //
-        //                         var id = response['data'][i].id;
-        //                         var name = response['data'][i].name;
-        //
-        //                         var option = "<option value='"+id+"'>"+name+"</option>";
-        //
-        //                         $("#category_id").append(option);
-        //                     }
-        //                 }
-        //
-        //             }
-        //         });
-        //         });
-        //
-        // });
+        $(document).ready(function(){
+            $('#category_id').change(function(){
+                // Empty the dropdown
+                $('#attribute_id').find('option').remove();
+                // AJAX request
+                $.ajax({
+                    url: '/api/categories/attribute',
+                    type: 'post',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'categories_id':$('#category_id').val()},
+                    dataType: 'json',
+                    success: function(response){
+                        var len = 0;
+                        if(response['data'] != null){
+                            len = response['data'].length;
+                        }
+
+                        if(len > 0){
+                            // Read data and create <option >
+                            for(var i=0; i<len; i++){
+
+                                var id = response['data'][i].id;
+                                var name = response['data'][i].title;
+
+                                var option = "<option value='"+id+"'>"+name+"</option>";
+
+                                $("#attribute_id").append(option);
+                            }
+                        }
+
+                    }
+                });
+                });
+
+        });
     </script>
 
 
