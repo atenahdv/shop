@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('styles')
 <link rel="stylesheet" href="{{asset('/admin/dist/css/dropzone.css')}}">
+<script type="text/javascript" src="{{asset('/admin/plugins/ckeditor/ckeditor.js')}}"></script>
 @endsection
 
 @section('content')
@@ -40,7 +41,7 @@
                     </div>
                     <label for="category_id"> دسته بندی  : </label>
                     <div class="form-group">
-                        <select name="category_id[]" id="category_id" class="form-control" multiple>
+                        <select name="category_id[]" id="category_id" class="form-control" >
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                 @if(count($category->childrenRecursive))
@@ -80,15 +81,15 @@
 
                     </div>
 
-                    <label for="meta_desc">توضیحات برند:  </label>
+                    <label for="meta_desc">توضیحات :  </label>
                     <div class="form-group">
-                        <textarea name="description" id="description" type="text" class="form-control" placeholder="توضیحات برند"></textarea>
+                        <textarea name="description" id="description" type="text" class="ckeditor form-control" placeholder="توضیحات برند"></textarea>
                         @error('description')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <label for="photo">تصویر :  </label>
-                    <input type="hidden" name="photo_id" id="photo_id">
+                    <label for="photo">گالری تصاویر :  </label>
+                    <input type="hidden" name="photo_id[]" id="product_photo">
                     <div class="form-group">
                     <div id="photo" class="dropzone"></div>
                     </div>
@@ -112,7 +113,7 @@
                         <input name="meta_keywords" id="meta_keywords" type="text" class="form-control" placeholder="کلمات کلیدی سئو">
                     </div>
 
-    <button type="submit" class=" pull-left btn btn-success">ذخیره</button>
+    <button type="submit" onclick="productGallery()" class=" pull-left btn btn-success">ذخیره</button>
 
                 </form>
 
@@ -147,7 +148,6 @@
                         if(len > 0){
                             // Read data and create <option >
                             for(var i=0; i<len; i++){
-
                                 var id = response['data'][i].id;
                                 var name = response['data'][i].title;
 
@@ -166,19 +166,30 @@
 
 
 <script type="text/javascript" src="{{asset('/admin/dist/js/dropzone.js')}}"></script>
+
     <script>
         var csrf_token = "{{ csrf_token() }}";
+        var photosGallery=[];
         var dropzone = new Dropzone('#photo', {
             addRemoveLinks:true,
-            maxFiles:1,
             url: "{{route('photos.upload')}}",
             sending:function (file,xhr,formData) {
             formData.append("_token",csrf_token)
             },
             success: function (file,response) {
-                document.getElementById('photo_id').value=response.photo_id;
-
+                photosGallery.push(response.photo_id);
             }
+        });
+
+       function productGallery() {
+            document.getElementById('product_photo').value=photosGallery;
+        }
+        $(window).on('load', function (){
+            CKEDITOR.replace('description',{
+            customConfig: 'config.js',
+            language : 'de',
+            toolbar:'simple',
+        });
         });
 
     </script>
