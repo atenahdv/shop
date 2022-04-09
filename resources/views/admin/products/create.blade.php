@@ -41,7 +41,7 @@
                     </div>
                     <label for="category_id"> دسته بندی  : </label>
                     <div class="form-group">
-                        <select name="category_id[]" id="category_id" class="form-control" >
+                        <select name="category_id" id="category_id" class="form-control" >
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                 @if(count($category->childrenRecursive))

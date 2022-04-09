@@ -146,10 +146,12 @@ class CategoryController extends Controller
     public function apiIndexAttribute(Request $request)
     {
       $categories=$request->categories_id;
+
       $attributeGroup['data']=AttributeGroup::with('attributesValue','categories')
           ->whereHas('categories', function ($q) use ($categories) {
-              $q->whereIN('categories.id',$categories);
+              $q->where('categories.id',$categories);
           })->get();
+
         return response()->json($attributeGroup);
     }
 }

@@ -21,4 +21,15 @@ class Product extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function attributValues()
+    {
+        return $this->belongsToMany(AttributeValue::class,'attributevalue_product','product_id','attributeValue_id');
+
+    }
+
+    public function photos()
+    {
+      return $this->belongsToMany(Photo::class);
+    }
 }

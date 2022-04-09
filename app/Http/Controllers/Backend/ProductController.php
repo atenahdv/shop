@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -40,9 +41,44 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function generateSKU(){
+        $number=mt_rand(1000,99999);
+
+        if($this->checkSKU($number)){
+           return  $this->generateSKU();
+        }
+        return (string)$number;
+    }
+    public function checkSKU($number){
+        return Product::where('sku',$number)->exists();
+    }
+
+    public function makeSlug($string)
+    {
+        $string=strtolower($string);
+        $string=str_replace(['?','؟'],'',$string);
+        return preg_replace('/\s+/u','-',trim($string));
+    }
+
     public function store(Request $request)
     {
-        return $request->all();
+      $newproduct=new Product();
+      $newproduct->title=$request->title;
+      $newproduct->sku=$this->generateSKU();
+      $newproduct->slug=$this->makeSlug($request->slug);
+      $newproduct->status=$request->status;
+      $newproduct->description=$request->description;
+      $newproduct->price=$request->price;
+      $newproduct->discount_price=$request->discount_price;
+      $newproduct->category_id=$request->category_id;
+      $newproduct->brand_id=$request->brand_id;
+      $newproduct->user_id=1;
+      $newproduct->save();
+      $photos=explode(',',$request->input('photo_id')[0]);
+
+      $newproduct->photos()->sync($photos);
+        Session::flash('success','محصول مورد نظر با موفیقت ایجاد شد.');
+        return redirect('/administrator/products');
     }
 
     /**
